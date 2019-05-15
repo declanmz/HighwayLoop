@@ -51,9 +51,9 @@ void coneAvoidanceMeasures(){
     rbt.drive(sped, sped*.75);
     Serial.println("Right Veer");
   }
-  lineSense();
-  while(!sB[7] && !sB[6]){
-    lineSense();
+  rbt.lineSense();
+  while(!rbt.sB[7] && !rbt.sB[6]){
+    rbt.lineSense();
     rbt.drive(sped,sped);
     Serial.println("Forward");
   }

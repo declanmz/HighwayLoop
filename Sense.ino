@@ -1,18 +1,18 @@
-void lineSense() {
-  Wire.requestFrom(9, 16);    // request 16 bytes from slave device #9
-  while (Wire.available())   // slave may send less than requested
-  {
-    data[t] = Wire.read(); // receive a byte as character
-    if (t < 15)
-      t++;
-    else
-      t = 0;
-  }
-
-  for (int i = 0; i <= 7; i++) {
-    sB[i] = data[i * 2] < threshold;
-  }
-}
+//void lineSense() {
+//  Wire.requestFrom(9, 16);    // request 16 bytes from slave device #9
+//  while (Wire.available())   // slave may send less than requested
+//  {
+//    data[t] = Wire.read(); // receive a byte as character
+//    if (t < 15)
+//      t++;
+//    else
+//      t = 0;
+//  }
+//
+//  for (int i = 0; i <= 7; i++) {
+//    sB[i] = data[i * 2] < threshold;
+//  }
+//}
 
 //int findDist(int a){
 //  digitalWrite(trig[a], LOW);
