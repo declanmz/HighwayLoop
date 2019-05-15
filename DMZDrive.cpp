@@ -2,7 +2,7 @@
 #include "DMZDrive.h"
 #include <Wire.h>
 
-DMZDrive::DMZDrive(int lsp, int l1, int l2, int rsp, int r1, int r2, int trig[], int echo[], int threshold) {
+DMZDrive::DMZDrive(int lsp, int l1, int l2, int rsp, int r1, int r2, int trig[], int echo[], int threshold, int leftShift) {
   lsp = lsp;
   l1 = l1;
   l2 = l2;
@@ -12,9 +12,10 @@ DMZDrive::DMZDrive(int lsp, int l1, int l2, int rsp, int r1, int r2, int trig[],
   echo = echo;
   trig = trig;
   threshold = threshold;
+  leftShift = leftShift;
 }
 
-void DMZDrive::drive(int b, int a) {
+void DMZDrive::drive(int b, int a) { //input left and right speeds from -255 to 255, will move motors at those speeds
   if (a > 0) {
     digitalWrite(r1, HIGH);
     digitalWrite(r2, LOW);
@@ -39,13 +40,13 @@ void DMZDrive::drive(int b, int a) {
 
   a = abs(a);
   b = abs(b);
-  b = map(b, 0, 255, 0, 245);
+  b = map(b, 0, 255, 0, leftShift); //maps the left motor to straighten the robot path
 
   analogWrite(lsp, b);
   analogWrite(rsp, a);
 }
 
-int DMZDrive::findDist(int a) {
+int DMZDrive::findDist(int a) { //ultrasonic sensor find distance, input the number of the sensor, indexing starts at 0
   digitalWrite(trig[a], LOW);
   delayMicroseconds(2);
   digitalWrite(trig[a], HIGH);
@@ -54,7 +55,7 @@ int DMZDrive::findDist(int a) {
   return float(pulseIn(echo[a], HIGH) * 0.034 / 2);
 }
 
-void DMZDrive::lineSense() {
+void DMZDrive::lineSense() { //outputs true/false for sB array based on if sensor value is below threshold (true if on black)
   Wire.requestFrom(9, 16);    // request 16 bytes from slave device #9
   while (Wire.available())   // slave may send less than requested
   {
@@ -70,7 +71,7 @@ void DMZDrive::lineSense() {
   }
 }
 
-void DMZDrive::rightLineFollow(float spedMult) {
+void DMZDrive::rightLineFollow(float spedMult) { //line follower program for following a line on the right side of the robot
   lineSense();
   if (sB[0] && sB[7]) {
     drive(0, 0);
@@ -89,7 +90,7 @@ void DMZDrive::rightLineFollow(float spedMult) {
   }
 }
 
-float DMZDrive::spedMultDist(float bottom, float top) {
+float DMZDrive::spedMultDist(float bottom, float top) { //outputs a float from 0 to 1 based on distance with the front ultrasonic, bottom and top are the minimum and maximum values, where 0 and 1 will be output
   float dist0 = findDist(0);
 
   if (dist0 > top) {
