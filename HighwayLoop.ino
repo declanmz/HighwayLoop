@@ -1,4 +1,5 @@
 #include <Wire.h>
+#include "DMZDrive.h"
 #define uchar unsigned char
 
 #define lsp 3
@@ -19,6 +20,8 @@ uchar data[16];
 
 #define threshold 70
 bool sB[8]; //an array of booleans based on if the line follower is touching a line (ordered 0 - 7)
+
+DMZDrive drv(lsp,l1,l2,rsp,r1,r2);
 
 void setup()
 {

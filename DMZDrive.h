@@ -6,7 +6,14 @@
 class DMZDrive{
   public:
       DMZDrive(int lsp,int l1,int l2,int rsp,int r1,int r2);
-
-
+      void drive(int b, int a);
   private:
-}
+      int lsp;
+      int l1; 
+      int l2;
+      int rsp;
+      int r1;
+      int r2;
+};
+
+#endif

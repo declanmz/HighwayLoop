@@ -12,18 +12,18 @@ void rightLineFollow() {
   }
   
   if (sB[0] && sB[7]) {
-    drive(0, 0);
+    drv.drive(0, 0);
   } else if (!sB[3] && !sB[4] && !sB[5] && !sB[6] && !sB[7]) {
-    drive(250*spedMult, -100*spedMult);
+    drv.drive(250*spedMult, -100*spedMult);
   } else if (sB[3]) {
-    drive(-250*spedMult, 250*spedMult);
+    drv.drive(-250*spedMult, 250*spedMult);
   } else if (sB[4]) {
-    drive(-150*spedMult, 250*spedMult);
+    drv.drive(-150*spedMult, 250*spedMult);
   } else if (sB[5]) {
-    drive(50*spedMult, 250*spedMult);
+    drv.drive(50*spedMult, 250*spedMult);
   } else if (sB[6]) {
-    drive(200*spedMult, 250*spedMult);
+    drv.drive(200*spedMult, 250*spedMult);
   } else if (sB[7]) {
-    drive(250*spedMult, 250*spedMult);
+    drv.drive(250*spedMult, 250*spedMult);
   }
 }
