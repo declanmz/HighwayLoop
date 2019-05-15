@@ -14,16 +14,16 @@ void lineSense() {
   }
 }
 
-int findDist(int a){
-  digitalWrite(trig[a], LOW);
-  delayMicroseconds(2);
-  digitalWrite(trig[a], HIGH);
-  delayMicroseconds(10);
-  digitalWrite(trig[a], LOW);
-  duration[a] = pulseIn(echo[a], HIGH);
-  distance[a]= duration[a]*0.034/2;
-  return distance[a];
-}
+//int findDist(int a){
+//  digitalWrite(trig[a], LOW);
+//  delayMicroseconds(2);
+//  digitalWrite(trig[a], HIGH);
+//  delayMicroseconds(10);
+//  digitalWrite(trig[a], LOW);
+//  duration[a] = pulseIn(echo[a], HIGH);
+//  distance[a]= duration[a]*0.034/2;
+//  return distance[a];
+//}
 
 
 //int findDist1(){

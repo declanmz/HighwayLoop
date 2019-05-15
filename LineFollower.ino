@@ -1,29 +1,30 @@
 void rightLineFollow() {
   lineSense();
   float spedMult;
+  float dist0 = rbt.findDist(0);
 
-  if(distance[0] > 25){
+  if(dist0 > 25){
     spedMult = .7;
-  }else if(distance[0] <= 25 && distance[0] > 16){
-    spedMult = float(distance[0]);
+  }else if(dist0 <= 25 && dist0 > 16){
+    spedMult = float(dist0);
     map(spedMult, 16, 25, 0, .7);
   }else{
     spedMult = 0;
   }
   
   if (sB[0] && sB[7]) {
-    drv.drive(0, 0);
+    rbt.drive(0, 0);
   } else if (!sB[3] && !sB[4] && !sB[5] && !sB[6] && !sB[7]) {
-    drv.drive(250*spedMult, -100*spedMult);
+    rbt.drive(250*spedMult, -100*spedMult);
   } else if (sB[3]) {
-    drv.drive(-250*spedMult, 250*spedMult);
+    rbt.drive(-250*spedMult, 250*spedMult);
   } else if (sB[4]) {
-    drv.drive(-150*spedMult, 250*spedMult);
+    rbt.drive(-150*spedMult, 250*spedMult);
   } else if (sB[5]) {
-    drv.drive(50*spedMult, 250*spedMult);
+    rbt.drive(50*spedMult, 250*spedMult);
   } else if (sB[6]) {
-    drv.drive(200*spedMult, 250*spedMult);
+    rbt.drive(200*spedMult, 250*spedMult);
   } else if (sB[7]) {
-    drv.drive(250*spedMult, 250*spedMult);
+    rbt.drive(250*spedMult, 250*spedMult);
   }
 }
