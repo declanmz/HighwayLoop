@@ -2,8 +2,6 @@
 #include "DMZDrive.h"
 #include <Wire.h>
 
-
-
 DMZDrive::DMZDrive(int lsp,int l1,int l2,int rsp,int r1,int r2, int trig[], int echo[], int threshold){
   lsp = lsp; 
   l1 = l1; 
@@ -56,7 +54,7 @@ int DMZDrive::findDist(int a){
   return float(pulseIn(echo[a],HIGH)*0.034/2);
 }
 
-void DMZDrive::lineSense() {
+void DMZDrive::lineSense(){
   Wire.requestFrom(9, 16);    // request 16 bytes from slave device #9
   while (Wire.available())   // slave may send less than requested
   {
@@ -69,5 +67,36 @@ void DMZDrive::lineSense() {
 
   for (int i = 0; i <= 7; i++) {
     sB[i] = data[i * 2] < threshold;
+  }
+}
+
+void DMZDrive::rightLineFollow(float spedMult) {
+  lineSense();
+  if (sB[0] && sB[7]) {
+    drive(0, 0);
+  } else if (!sB[3] && !sB[4] && !sB[5] && !sB[6] && !sB[7]) {
+    drive(250*spedMult, -100*spedMult);
+  } else if (sB[3]) {
+    drive(-250*spedMult, 250*spedMult);
+  } else if (sB[4]) {
+    drive(-150*spedMult, 250*spedMult);
+  } else if (sB[5]) {
+    drive(50*spedMult, 250*spedMult);
+  } else if (sB[6]) {
+    drive(200*spedMult, 250*spedMult);
+  } else if (sB[7]) {
+    drive(250*spedMult, 250*spedMult);
+  }
+}
+
+float DMZDrive::spedMultDist(float bottom, float top){
+  float dist0 = findDist(0);
+
+  if(dist0 > top){
+    return 0.7;
+  }else if(dist0 <= top && dist0 > bottom){
+    return map(float(dist0), bottom, top, 0, .7);
+  }else{
+    return 0;
   }
 }

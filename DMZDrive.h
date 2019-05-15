@@ -10,6 +10,8 @@ class DMZDrive{
       int findDist(int a);
       void lineSense();
       bool sB[8];
+      void rightLineFollow(float spedMult=1);
+      float spedMultDist(float bottom, float top);
   private:
       int lsp;
       int l1; 
@@ -22,6 +24,7 @@ class DMZDrive{
       unsigned char t;
       unsigned char data[16];
       int threshold;
+      float dist0;
 };
 
 #endif
