@@ -5,7 +5,7 @@
 
 class DMZDrive {
   public:
-    DMZDrive(int lsp, int l1, int l2, int rsp, int r1, int r2, int trig[], int echo[], int threshold, int leftShift);
+    DMZDrive(int lsp_, int l1_, int l2_, int rsp_, int r1_, int r2_, int trig_[], int echo_[], int threshold_, int leftShift_);
     void drive(int b, int a);
     int findDist(int a);
     void lineSense();

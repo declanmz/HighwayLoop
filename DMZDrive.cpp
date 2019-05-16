@@ -2,17 +2,19 @@
 #include "DMZDrive.h"
 #include <Wire.h>
 
-DMZDrive::DMZDrive(int lsp, int l1, int l2, int rsp, int r1, int r2, int trig[], int echo[], int threshold, int leftShift) {
-  lsp = lsp;
-  l1 = l1;
-  l2 = l2;
-  rsp = rsp;
-  r1 = r1;
-  r2 = r2;
-  echo = echo;
-  trig = trig;
-  threshold = threshold;
-  leftShift = leftShift;
+DMZDrive::DMZDrive(int lsp_, int l1_, int l2_, int rsp_, int r1_, int r2_, int trig_[], int echo_[], int threshold_, int leftShift_) {
+  lsp = lsp_;
+  l1 = l1_;
+  l2 = l2_;
+  rsp = rsp_;
+  r1 = r1_;
+  r2 = r2_;
+  for(int i = 0; i < sizeof(echo_); i++){
+     echo[i] = echo_[i];
+     trig[i] = trig_[i];
+  }
+  threshold = threshold_;
+  leftShift = leftShift_;
 }
 
 void DMZDrive::drive(int b, int a) { //input left and right speeds from -255 to 255, will move motors at those speeds
@@ -46,13 +48,13 @@ void DMZDrive::drive(int b, int a) { //input left and right speeds from -255 to 
   analogWrite(rsp, a);
 }
 
-int DMZDrive::findDist(int a) { //ultrasonic sensor find distance, input the number of the sensor, indexing starts at 0
-  digitalWrite(trig[a], LOW);
+int DMZDrive::findDist(int c) { //ultrasonic sensor find distance, input the number of the sensor, indexing starts at 0
+  digitalWrite(trig[c], LOW);
   delayMicroseconds(2);
-  digitalWrite(trig[a], HIGH);
+  digitalWrite(trig[c], HIGH);
   delayMicroseconds(10);
-  digitalWrite(trig[a], LOW);
-  return float(pulseIn(echo[a], HIGH) * 0.034 / 2);
+  digitalWrite(trig[c], LOW);
+  return float(pulseIn(echo[c], HIGH) * 0.034 / 2);
 }
 
 void DMZDrive::lineSense() { //outputs true/false for sB array based on if sensor value is below threshold (true if on black)

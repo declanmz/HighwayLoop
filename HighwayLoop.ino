@@ -19,9 +19,12 @@ DMZDrive rbt(lsp, l1, l2, rsp, r1, r2, trig, echo, threshold, leftShift); //crea
 
 void setup() {
   Wire.begin(); //i2c bus communication for line follower module
+  Serial.begin(9600);
 }
 
 void loop() {
-  rbt.drive(100,100);
+ // rbt.findDist(0);
+ // rbt.drive(100,100);
+ Serial.println(rbt.findDist(0));
   //rbt.rightLineFollow(rbt.spedMultDist(16, 25)); //follow right line, set the speed multiplier to change based on the front ultrasonic distance min = 16cm, max = 25cm
 }
