@@ -22,5 +22,6 @@ void setup() {
 }
 
 void loop() {
-  rbt.rightLineFollow(rbt.spedMultDist(16, 25)); //follow right line, set the speed multiplier to change based on the front ultrasonic distance min = 16cm, max = 25cm
+  rbt.drive(100,100);
+  //rbt.rightLineFollow(rbt.spedMultDist(16, 25)); //follow right line, set the speed multiplier to change based on the front ultrasonic distance min = 16cm, max = 25cm
 }
